@@ -25,14 +25,14 @@ services:
     container_name: odoo18-mcp-server
     restart: unless-stopped
     ports:
-      - "8000:8000"
+      - "8100:8100"
     environment:
       - ODOO_URL=${ODOO_URL:-http://odoo:8069}
       - ODOO_DB=${ODOO_DB:-llmdb18}
       - ODOO_USERNAME=${ODOO_USERNAME:-admin}
       - ODOO_PASSWORD=${ODOO_PASSWORD:-admin}
       - MCP_HOST=0.0.0.0
-      - MCP_PORT=8000
+      - MCP_PORT=8100
       - MCP_DEBUG=false
       - MCP_LOG_LEVEL=INFO
       - ENVIRONMENT=production
@@ -45,7 +45,7 @@ services:
       - mcp_network
       - odoo_network
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:8100/health"]
       interval: 30s
       timeout: 10s
       retries: 3
