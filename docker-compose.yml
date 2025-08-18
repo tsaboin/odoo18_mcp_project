@@ -16,14 +16,14 @@ services:
     container_name: odoo18-mcp-server
     restart: unless-stopped
     ports:
-      - "8000:8000"
+      - "8100:8000"
     environment:
       - ODOO_URL=${ODOO_URL:-http://odoo:8069}
       - ODOO_DB=${ODOO_DB:-llmdb18}
       - ODOO_USERNAME=${ODOO_USERNAME:-admin}
       - ODOO_PASSWORD=${ODOO_PASSWORD:-admin}
       - MCP_HOST=0.0.0.0
-      - MCP_PORT=8000
+      - MCP_PORT=8100
       - MCP_DEBUG=${MCP_DEBUG:-false}
       - MCP_LOG_LEVEL=${MCP_LOG_LEVEL:-INFO}
       - ODOO_DOCS_DIR=./odoo_docs
@@ -67,7 +67,7 @@ services:
       - ODOO_USERNAME=${ODOO_USERNAME:-admin}
       - ODOO_PASSWORD=${ODOO_PASSWORD:-admin}
       - MCP_HOST=0.0.0.0
-      - MCP_PORT=8000
+      - MCP_PORT=8100
       - MCP_DEBUG=${MCP_DEBUG:-true}
       - MCP_LOG_LEVEL=${MCP_LOG_LEVEL:-INFO}
     volumes:
@@ -106,7 +106,7 @@ services:
       - ODOO_PASSWORD=${ODOO_PASSWORD:-admin}
       - MCP_DEBUG=${MCP_DEBUG:-true}
       - MCP_LOG_LEVEL=${MCP_LOG_LEVEL:-DEBUG}
-      - MCP_SERVER_URL=http://standalone-server:8000
+      - MCP_SERVER_URL=http://standalone-server:8100
       - GEMINI_API_KEY=${GEMINI_API_KEY:-}
       - GEMINI_MODEL=${GEMINI_MODEL:-gemini-2.0-flash}
     volumes:
