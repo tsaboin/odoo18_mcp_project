@@ -72,7 +72,7 @@ RUN chown -R mcp:mcp /app /app/logs /app/data /app/exports /app/tmp /app/generat
 USER mcp
 
 # Expose the port the app runs on
-EXPOSE 8000
+EXPOSE 8100
 
 # Set entrypoint script permissions
 USER root
@@ -80,7 +80,7 @@ RUN chmod +x /app/entrypoint.sh
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD curl -f http://0.0.0.0:8000/health || exit 1
+    CMD curl -f http://0.0.0.0:8100/health || exit 1
 
 # Command to run the application
 ENTRYPOINT ["/app/entrypoint.sh"]
