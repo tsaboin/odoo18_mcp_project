@@ -41,6 +41,18 @@ class MCPClient:
             debug=self.settings.mcp.debug,
         )
         self._setup_routes()
+        # Mount FastMCP tools via streamable-http transport
+        try:
+            import importlib.util, sys
+            _spec = importlib.util.spec_from_file_location("mcp_server", "/app/mcp_server.py")
+            _mod = importlib.util.module_from_spec(_spec)
+            sys.modules["mcp_server"] = _mod
+            _spec.loader.exec_module(_mod)
+            self.app.mount("/mcp", _mod.mcp.streamable_http_app())
+            logger.info("MCP streamable-http transport mounted at /mcp")
+        except Exception as e:
+            logger.warning(f"Failed to mount MCP transport: {e}")
+
         self._odoo_client = None
 
     def _setup_routes(self) -> None:
